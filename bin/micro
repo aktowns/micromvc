@@ -23,5 +23,6 @@ if options[:name].nil?
 else
   project = Micro::Generator::Initial.new(File.join(Dir.pwd, options[:name]))
   project.make_folders
+  project.bundle_install
 end
 

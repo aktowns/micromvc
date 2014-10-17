@@ -10,6 +10,16 @@ module Micro::Generator
       gem 'micromvc', path: '~/RubymineProjects/micromvc'
     EOF
 
+    DEMO_CONTROLLER = <<-EOF
+      class DemoController < Micro::Controller
+        root '/'
+
+        index do
+          render 'Hello, World!'
+        end
+      end
+    EOF
+
     def initialize(dir)
       @dir = dir
     end
@@ -23,14 +33,18 @@ module Micro::Generator
       end
       mkdir_p File.join(@dir, 'config')
 
-      IO.write(strip_heredoc(GEMFILE), File.join(@app, 'Gemfile'))
+      IO.write(File.join(@dir, 'Gemfile'), strip_heredoc(GEMFILE))
+      IO.write(File.join(@dir, 'app','controllers', 'demo_controller.rb'), strip_heredoc(DEMO_CONTROLLER))
+    end
+
+    def bundle_install
+      exec "cd #{@dir} && bundle install"
     end
 
     private
 
     def strip_heredoc(str)
-      indent = str.scan(/^[ \t]*(?=\S)/).min.try(:size) || 0
-      str.gsub(/^[ \t]{#{indent}}/, '')
+      str.gsub(/^#{str[/\A\s*/]}/, '')
     end
   end
 end
