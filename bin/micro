@@ -6,5 +6,4 @@ require 'rack'
 puts "Micro #{Micro::VERSION}"
 
 loader = Micro::Support::Loader.new(Dir.pwd)
-loader.startup(true)
-
+loader.startup
