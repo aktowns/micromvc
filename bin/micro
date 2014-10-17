@@ -1,9 +1,27 @@
 #!/usr/bin/env ruby
 
 require 'micro'
+require 'micro/generator/initial'
+
 require 'rack'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = 'Usage: micro [options]'
+
+  opts.on('-i', '--init NAME', 'Initialize a new project') do |name|
+    options[:name] = name
+  end
+  opts.on('-s', '--server', 'Spawn a server from the current working dir')
+end.parse!
 
 puts "Micro #{Micro::VERSION}"
+if options[:name].nil?
+  loader = Micro::Support::Loader.new(Dir.pwd)
+  loader.startup
+else
+  project = Micro::Generator::Initial.new(File.join(Dir.pwd, options[:name]))
+  project.make_folders
+end
 
-loader = Micro::Support::Loader.new(Dir.pwd)
-loader.startup
