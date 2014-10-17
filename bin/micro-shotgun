@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+%w(INT TERM QUIT).each do |signal|
+  trap(signal) do
+    Process.wait rescue nil
+    exit!
+  end
+end
+
+while true
+  p %x(micro)
+end
