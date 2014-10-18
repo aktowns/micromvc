@@ -27,6 +27,7 @@ if options[:name].nil?
   app = loader.startup
 
   builder = Rack::Builder.new
+  builder.use Rack::Static, urls: %w(/css /js /images /fonts), root: 'public'
   builder.use Rack::ETag
   builder.use Rack::Session::Cookie, secret: 'bob'
   # builder.use Rack::Unreloader

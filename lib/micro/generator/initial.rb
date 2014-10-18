@@ -31,6 +31,10 @@ module Micro::Generator
       %w(initializers tasks).each do |libfolder|
         mkdir_p File.join(@dir, 'lib', libfolder)
       end
+      %w(css js images fonts).each do |pubfolder|
+        mkdir_p File.join(@dir, 'public', pubfolder)
+      end
+
       mkdir_p File.join(@dir, 'config')
       mkdir_p File.join(@dir, 'app', 'views', 'layouts')
 
