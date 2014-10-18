@@ -7,7 +7,7 @@ A tiny toy opinionated MVC framework.
 Controllers are placed in `app/controllers/MyController.rb` and subclass `Micro::Controller`.  
 
 ```ruby
-class HomeController < Micro::Controller
+class MyController < Micro::Controller
   root '/'                    # this is the root path for this controller.
 
   index do                    # CRUD actions are aliased for easy use.
