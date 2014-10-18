@@ -79,6 +79,11 @@ Helpers imported on the controller are available to views.
 A default layout can be placed in `app/views/layouts/default.extension` and can be 
 overriden on a per-controller basis by using `layout <layout name>` inside a controller.
 
+## Public(Static) files 
+
+Static files are served from the `public` directory based on the type of file from a subdirectory
+`public/js`, `public/css`, `public/fonts`, `public/images` and referenced by those folders.
+
 ## Usage
 
 TODO: everything.
