@@ -36,7 +36,7 @@ module Micro::Support
     end
 
     def startup
-      [@helpers, @controllers, @models, @decorators].each(&method(:require_all))
+      [@helpers, @decorators, @models, @controllers].each(&method(:require_all))
 
       puts "Loaded #{@controllers.length} controller(s)"
       puts "Loaded #{@models.length} model(s)"
