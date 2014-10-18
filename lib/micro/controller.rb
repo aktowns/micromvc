@@ -13,7 +13,12 @@ module Micro
 
     def layout(content)
       view_name = File.join(Micro::Config.shared.layouts_path, 'default')
-      Micro::View.new(view_name, self).render { content }
+      view_file = Micro::View.find(view_name)
+      if view_file.nil?
+        content
+      else
+        Micro::View.new(view_name, self).render { content }
+      end
     end
 
     def render(str)
