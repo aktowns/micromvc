@@ -12,11 +12,12 @@ module Micro::Support
       lib_path      = File.join(root_path, 'lib')
       config_path   = File.join(root_path, 'config')
 
-      config.root_path   = root_path
-      config.app_path    = app_path
-      config.lib_path    = lib_path
-      config.config_path = config_path
-      config.views_path  = File.join(app_path, 'views')
+      config.root_path    = root_path
+      config.app_path     = app_path
+      config.lib_path     = lib_path
+      config.config_path  = config_path
+      config.views_path   = File.join(app_path, 'views')
+      config.layouts_path = File.join(config.views_path, 'layouts')
 
       @controllers  = Dir[File.join(app_path, 'controllers', '**', '*.rb')]
       @models       = Dir[File.join(app_path, 'models', '**', '*.rb')]
@@ -45,6 +46,9 @@ module Micro::Support
 
       # Flatten our routes from multiple controllers..
       routes = klasses.inject({}){|x,y|x.merge(y[:klass].routes(y))}
+
+      ap routes
+
       router = Micro::Support::Router.new(routes)
 
       Rack::Server.start app: router

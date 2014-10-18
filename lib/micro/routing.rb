@@ -10,7 +10,6 @@ module Micro
       attr_reader :root
 
       def root(path)
-        path = '' if path == '/'
         @root = path
       end
 
@@ -46,7 +45,7 @@ module Micro
 
       # CRUD
       def index(&block)
-        get('/', :index, &block)
+        get('', :index, &block)
       end
 
       def show(&block)

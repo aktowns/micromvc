@@ -32,6 +32,7 @@ module Micro::Generator
         mkdir_p File.join(@dir, 'lib', libfolder)
       end
       mkdir_p File.join(@dir, 'config')
+      mkdir_p File.join(@dir, 'app', 'views', 'layouts')
 
       IO.write(File.join(@dir, 'Gemfile'), strip_heredoc(GEMFILE))
       IO.write(File.join(@dir, 'app','controllers', 'demo_controller.rb'), strip_heredoc(DEMO_CONTROLLER))
