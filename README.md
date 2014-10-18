@@ -54,22 +54,30 @@ end
 
 ```
 
+## Views, Layouts, Templating 
 
-## Installation
+Views can be in any language supported by [Tilt](Tilt) by default only `.erb` support is supplied.
+Views share the scope with the controller similar to how Rails works so for example in your controller if you have
 
-Add this line to your application's Gemfile:
+```ruby 
+# app/controller/demo_controller.rb
+def index do 
+  @posts = Post.all
+end
+``` 
 
-```ruby
-gem 'micromvc'
+Then in your `app/views/demo/index.erb` you can do
+
+```erb 
+<% @posts.each do |post| %>
+...
+<% end %>
 ```
 
-And then execute:
+Helpers imported on the controller are available to views. 
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install micromvc
+A default layout can be placed in `app/views/layouts/default.extension` and can be 
+overriden on a per-controller basis by using `layout <layout name>` inside a controller.
 
 ## Usage
 
