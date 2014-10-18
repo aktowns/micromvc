@@ -2,13 +2,20 @@
 
 A tiny toy opinionated MVC framework. 
 
-## Controllers and Routing
+## Controllers, Routing and Helpers
 
 Controllers are placed in `app/controllers/MyController.rb` and subclass `Micro::Controller`.  
+Routes are defined inline on a controller, multiple controllers can fulfil a single root 
+but cannote contain duplicate routes. 
+
+Helpers can be loaded and are available from both controllers and views by using  `helper MyHelperModule`
+or `helpers [MyHelperA, MyHelperB]`. 
 
 ```ruby
 class MyController < Micro::Controller
   root '/'                    # this is the root path for this controller.
+
+  helper MagicHelper          # Explicitly choose which helpers to import
 
   index do                    # CRUD actions are aliased for easy use.
     render 'Hello, World!'    # At the moment only text rendering.
@@ -19,6 +26,34 @@ class MyController < Micro::Controller
   end
 end                           # FIN.
 ```
+
+## Models and Decorators
+
+Models are placed in `app/models/MyModel.rb` and subclass `Micro::Model`. 
+There are no hard restrictions on what a model can be at the moment, but they are loaded 
+in the context of all controllers. 
+
+Models are able to import `Decorators` similar to how controllers import `Helpers`
+
+```ruby 
+class MyModel < Micro::Model 
+  decorator FullNameDecorator
+  
+  def first_name
+    "Ashley"
+  end 
+  
+  def last_name
+    "Towns"
+  end
+end
+
+# model = MyModel.new
+# model.first_name 
+# model.full_name # from a decorator
+
+```
+
 
 ## Installation
 
