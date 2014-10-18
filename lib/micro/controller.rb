@@ -1,6 +1,3 @@
-require 'awesome_print'
-require 'pry'
-
 module Micro
   class ActionNotFound < Exception; end
 

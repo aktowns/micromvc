@@ -1,4 +1,3 @@
-require 'pry'
 module Micro
   module Helpers
     def self.included(klass)

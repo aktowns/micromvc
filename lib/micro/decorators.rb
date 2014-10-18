@@ -1,4 +1,3 @@
-require 'pry'
 module Micro
   module Decorators
     def self.included(klass)
