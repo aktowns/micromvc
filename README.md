@@ -1,6 +1,6 @@
-# Micromvc
+# MicroMVC
 
-TODO: Write a gem description
+A tiny toy opinionated MVC framework. 
 
 ## Installation
 
@@ -20,7 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+TODO: everything.
+
+```ruby
+gem install micromvc
+micro --init MyAwesomeBlog
+cd MyAwesomeBlog
+micro --server
+```
 
 ## Contributing
 
