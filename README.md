@@ -8,16 +8,16 @@ Controllers are placed in `app/controllers/MyController.rb` and subclass `Micro:
 
 ```ruby
 class HomeController < Micro::Controller
-  root '/'                  # this is the root path for this controller.
+  root '/'                    # this is the root path for this controller.
 
-  index do                  # CRUD actions are aliased for easy use.
-    render 'Hello, World!'  # At the moment only text rendering.
+  index do                    # CRUD actions are aliased for easy use.
+    render 'Hello, World!'    # At the moment only text rendering.
   end
   
-  get '/custom', :custom do # Custom actions can be defined by http verbs.
+  get '/custom', :custom do   # Custom actions can be defined by http verbs.
     render 'A custom action!'
   end
-end                         # FIN.
+end                           # FIN.
 ```
 
 ## Installation
