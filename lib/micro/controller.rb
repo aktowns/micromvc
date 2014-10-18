@@ -22,7 +22,7 @@ module Micro
 
     def render(opts={})
       status = opts[:status] ||= 200
-      view   = opts[:view] || @info[:action].to_s
+      view   = opts[:view]   ||= @info[:action].to_s
 
       if opts[:text].nil?
         view_folder = @info[:file].gsub(/_controller$/, '')
