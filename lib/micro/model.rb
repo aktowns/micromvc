@@ -1,5 +1,7 @@
+require 'sequel'
+
 module Micro
-  class Model
+  class Model < Sequel::Model
     include Micro::Decorators
 
     def initialize
