@@ -1,5 +1,3 @@
-require 'awesome_print'
-
 module Micro
   module Routing
     def self.included(klass)

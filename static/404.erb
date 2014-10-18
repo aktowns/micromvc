@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page not found</title>
+</head>
+<body>
+<style type="text/css">
+* {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  vertical-align: top;
+  text-align: left;
+}
+
+textarea {
+  resize: none;
+}
+
+body {
+  font-size: 10pt;
+}
+
+body, td, input, textarea {
+  font-family: helvetica neue, lucida grande, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+html {
+  background: #f0f0f5;
+}
+
+/* ---------------------------------------------------------------------
+ * Basic layout
+ * --------------------------------------------------------------------- */
+
+/* Small */
+@media screen and (max-width: 1100px) {
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    margin: 0 20px;
+  }
+
+  header.exception {
+    margin: 0 -20px;
+  }
+
+  nav.sidebar {
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  ul.frames {
+    max-height: 200px;
+    overflow: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------
+ * Header
+ * --------------------------------------------------------------------- */
+
+header.exception {
+  padding: 18px 20px;
+
+  height: 59px;
+  min-height: 59px;
+
+  overflow: hidden;
+
+  background-color: #20202a;
+  color: #aaa;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  font-weight: 200;
+  box-shadow: inset 0 -5px 3px -3px rgba(0, 0, 0, 0.05), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+
+  -webkit-text-smoothing: antialiased;
+}
+
+/* Heading */
+header.exception h2 {
+  font-weight: 200;
+  font-size: 11pt;
+}
+
+header.exception h2,
+header.exception p {
+  line-height: 1.4em;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+}
+
+header.exception h2 strong {
+  font-weight: 700;
+  color: #d55;
+}
+
+header.exception p {
+  font-weight: 200;
+  font-size: 20pt;
+  color: white;
+}
+
+header.exception:hover {
+  height: auto;
+  z-index: 2;
+}
+
+header.exception:hover h2,
+header.exception:hover p {
+  padding-right: 20px;
+  overflow-y: auto;
+  word-wrap: break-word;
+  height: auto;
+  max-height: 7em;
+}
+
+@media screen and (max-width: 1100px) {
+  header.exception {
+    height: auto;
+  }
+
+  header.exception h2,
+  header.exception p {
+    padding-right: 20px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    height: auto;
+    max-height: 7em;
+  }
+}
+
+.inner {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.example {
+  background-color: white;
+  padding: 10px;
+  width: 500px;
+}
+
+</style>
+
+<div class='top'>
+  <header class="exception">
+    <h2><strong>404</strong> <span> Page not found</span></h2>
+    <p>The requested page was not found.</p>
+  </header>
+</div>
+<section class="backtrace">
+  <div class="inner">
+    <h1>The page at path <code><%= path %></code> was not found for action <code><%= method %></code>.</h1>
+    <br />
+    <p>You can stub this method out in a controller with the following: </p>
+    <br />
+    <pre class="example">
+  class AController < Micro::Controller
+      custom '<%= path %>', :method_name do
+
+      end
+  end</pre>
+  </div>
+</section>
+</body>
+</html>

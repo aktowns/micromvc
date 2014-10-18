@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['ashleyis@me.com']
   spec.summary       = %q{a tiny micro mvc framework}
   spec.description   = %q{a tiny opinionated micro mvc framework, this is a toy}
-  spec.homepage      = ''
+  spec.homepage      = 'http://github.com/aktowns/micromvc'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -20,9 +20,14 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'rack', '~> 1.5'
   spec.add_runtime_dependency 'tilt', '~> 2.0'
+  spec.add_runtime_dependency 'rack-unreloader', '~> 0'
+  spec.add_runtime_dependency 'awesome_print', '~> 0'
+  spec.add_runtime_dependency 'better_errors', '~> 0'
+  spec.add_runtime_dependency 'binding_of_caller', '~> 0'
+  spec.add_runtime_dependency 'thin', '~> 0'
+  spec.add_runtime_dependency 'sequel', '~> 0'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_runtime_dependency 'awesome_print', '~> 0'
   spec.add_development_dependency 'pry', '~> 0'
 end
