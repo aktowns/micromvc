@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'awesome_print', '~> 0'
   spec.add_runtime_dependency 'better_errors', '~> 0'
   spec.add_runtime_dependency 'binding_of_caller', '~> 0'
-  spec.add_runtime_dependency 'thin', '~> 0'
   spec.add_runtime_dependency 'sequel', '~> 0'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
