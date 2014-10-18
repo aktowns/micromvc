@@ -1,3 +1,5 @@
+require 'awesome_print'
+
 module Micro
   module Routing
     def self.included(klass)
@@ -5,12 +7,20 @@ module Micro
     end
 
     module ClassMethods
-      attr_reader :routes, :root
+      attr_reader :root
 
       def root(path)
         path = '' if path == '/'
-
         @root = path
+      end
+
+      def routes(extra={})
+        @routes.inject({}) do |x,y|
+          route = y[1].to_a.first
+          route[1] = route[1].merge(extra)
+          y[1] = Hash[*route.flatten]
+          x.merge(Hash[*y.flatten])
+        end
       end
 
       # HTTP Verbs
@@ -36,11 +46,11 @@ module Micro
 
       # CRUD
       def index(&block)
-        get('/', :get, &block)
+        get('/', :index, &block)
       end
 
       def show(&block)
-        get(':id', :get, &block)
+        get(':id', :show, &block)
       end
 
       private

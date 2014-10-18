@@ -8,15 +8,11 @@ module Micro::Support
   end
 
   class Router
-    def initialize(routes, oneshot=false)
-      @routes, @oneshot = routes, oneshot
-      @downward = false
+    def initialize(routes)
+      @routes = routes
     end
 
     def call(env)
-      exit! if @downward && @oneshot
-      @downward = true
-
       path = env['PATH_INFO']
       method = env['REQUEST_METHOD'].downcase.to_sym
 
@@ -24,11 +20,9 @@ module Micro::Support
       raise HttpException.new(404, "no route for '#{path}' exists.") if route.nil?
       target = route[method.to_sym]
 
-      target[:controller].new.instance_eval(&target[:block])
+      target[:controller].new(target).instance_eval(&target[:block])
     rescue HttpException => e
       [e.status, {}, [e.message]]
     end
   end
-
-
 end
