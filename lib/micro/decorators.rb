@@ -5,7 +5,7 @@ module Micro
     end
 
     def initialize_decorators
-      self.class.helpers.each do |x|
+      self.class.decorators.each do |x|
         extend x
       end
     end
