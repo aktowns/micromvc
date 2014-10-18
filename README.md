@@ -2,6 +2,20 @@
 
 A tiny toy opinionated MVC framework. 
 
+## Controllers and Routing
+
+Controllers are placed in `app/controllers/MyController.rb` and subclass `Micro::Controller`.  
+
+```ruby
+class HomeController < Micro::Controller
+  root '/'
+
+  index do
+    render 'Hello, World!'
+  end
+end
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
