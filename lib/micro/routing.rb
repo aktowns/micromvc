@@ -46,8 +46,28 @@ module Micro
         get('', :index, &block)
       end
 
+      # def new(&block)
+      #   get('new', :new, &block)
+      # end
+
+      def create(&block)
+        post('([0-9]+)', :create, &block)
+      end
+
       def show(&block)
-        get(':id', :show, &block)
+        get('([0-9]+)', :show, &block)
+      end
+
+      def edit(&block)
+        get('([0-9]+)/edit', :edit, &block)
+      end
+
+      def update(&block)
+        patch('([0-9]+)', :update, &block)
+      end
+
+      def destroy(&block)
+        delete('([0-9]+)', :destroy, &block)
       end
 
       private
