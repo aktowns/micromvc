@@ -3,7 +3,12 @@
 require 'micro'
 require 'micro/generator/initial'
 
+require 'thin'
+
 require 'rack'
+require 'rack/builder'
+require 'better_errors'
+
 require 'optparse'
 
 options = {}
@@ -19,7 +24,17 @@ end.parse!
 puts "Micro #{Micro::VERSION}"
 if options[:name].nil?
   loader = Micro::Support::Loader.new(Dir.pwd)
-  loader.startup
+  app = loader.startup
+
+  builder = Rack::Builder.new
+  builder.use Rack::ETag
+  builder.use Rack::Session::Cookie, secret: 'bob'
+  # builder.use Rack::Unreloader
+  builder.use BetterErrors::Middleware
+  builder.run app
+
+  Rack::Server.start app: builder
+
 else
   project = Micro::Generator::Initial.new(File.join(Dir.pwd, options[:name]))
   project.make_folders

@@ -2,10 +2,6 @@ require 'micro/routing'
 require 'micro/support/router'
 require 'micro/config'
 
-require 'thin'
-require 'better_errors'
-require 'rack/unreloader'
-
 module Micro::Support
   class Loader
     def initialize(path)
@@ -52,18 +48,8 @@ module Micro::Support
 
       # Flatten our routes from multiple controllers..
       routes = klasses.inject({}){|x,y|x.merge(y[:klass].routes(y))}
-      router = Micro::Support::Router.new(routes)
 
-      BetterErrors.application_root = __dir__
-
-      builder = Rack::Builder.new
-      builder.use Rack::ETag
-      builder.use Rack::Session::Cookie, secret: 'bob'
-      # builder.use Rack::Unreloader
-      builder.use BetterErrors::Middleware
-      builder.run router
-
-      Rack::Server.start app: builder
+      Micro::Support::Router.new(routes)
     end
 
     private
