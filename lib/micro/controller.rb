@@ -1,5 +1,6 @@
 module Micro
   class ActionNotFound < Exception; end
+  class ViewNotFound < Exception; end
 
   class Controller
     include Micro::Routing
@@ -19,6 +20,28 @@ module Micro
       @info = info
     end
 
+    def render(opts={})
+      status = opts[:status] ||= 200
+      view   = opts[:view] || @info[:action].to_s
+
+      if opts[:text].nil?
+        view_folder = @info[:file].gsub(/_controller$/, '')
+        view_name = File.join(Micro::Config.shared.views_path, view_folder, view)
+        view_file = Micro::View.find_view(view_name)
+
+        raise ViewNotFound.new("View not found for action #{@info[:action]}.") if view_file.nil?
+
+        rendered = layout(Micro::View.new(view_file, self).render)
+
+        content_type = opts[:content_type] ||= 'text/html'
+
+        [status, {'Content-Type' => content_type}, [rendered]]
+      else
+        content_type = opts[:content_type] ||= 'text/plain'
+        [status, {'Content-Type' => content_type}, [opts[:text]]]
+      end
+    end
+
     private
 
     def layout(content)
@@ -29,14 +52,6 @@ module Micro
       else
         Micro::View.new(view_name, self).render { content }
       end
-    end
-
-    def render(str)
-      view_folder = @info[:file].gsub(/_controller$/, '')
-      view_name = File.join(Micro::Config.shared.views_path, view_folder, @info[:action].to_s)
-      rendered = layout(Micro::View.new(view_name, self).render)
-
-      [200, {'Content-Type' => 'text/html'}, [rendered]]
     end
   end
 end

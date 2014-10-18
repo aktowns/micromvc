@@ -15,7 +15,6 @@ module Micro::Support
     def call(env)
       path = env['PATH_INFO']
       method = env['REQUEST_METHOD'].downcase.to_sym
-
       route = @routes[path]
       if route.nil?
         static_404 = File.join(Micro::Config.shared.gem_static, '404.erb')
@@ -25,7 +24,8 @@ module Micro::Support
 
       controller = target[:controller].new(target)
       controller.initialize_helpers
-      controller.instance_eval(&target[:block])
+      res = controller.instance_eval(&target[:block])
+      res.class == Array ? res : controller.render
     rescue HttpException => e
       [e.status, {}, [e.message]]
     end
