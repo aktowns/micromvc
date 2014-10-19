@@ -5,7 +5,6 @@ require 'micro/generator/initial'
 
 require 'rack'
 require 'rack/builder'
-require 'better_errors'
 
 require 'optparse'
 
@@ -27,9 +26,10 @@ if options[:name].nil?
   builder = Rack::Builder.new
   builder.use Rack::Static, urls: %w(/css /js /images /fonts), root: 'public'
   builder.use Rack::ETag
+  builder.use Rack::ShowExceptions
+  builder.use Rack::ShowStatus
+  builder.use Rack::Lint
   builder.use Rack::Session::Cookie, secret: 'bob'
-  # builder.use Rack::Unreloader
-  builder.use BetterErrors::Middleware
   builder.run app
 
   Rack::Server.start app: builder
